@@ -5,6 +5,12 @@ class Psr4AutoloaderClass
     
     protected $prefixes = array();
 
+public function __construct ()
+    {
+        $this->register();
+    }
+
+
     public function register()
     {
         spl_autoload_register(array($this, 'loadClass'));
@@ -70,7 +76,7 @@ class Psr4AutoloaderClass
 
     protected function requireFile($file)
     {
-        if (file_exists($file)) {
+        if (is_file($file)) {
             require $file;
             return true;
         }
